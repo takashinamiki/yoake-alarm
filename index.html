@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yoake Alarm</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="clock">
+      <div id="now-time" class="clock-time">--:--</div>
+      <div id="now-date" class="clock-date"></div>
+    </header>
+
+    <form id="alarm-form" class="alarm-form">
+      <input id="alarm-time" type="time" required aria-label="アラーム時刻">
+      <input id="alarm-label" type="text" maxlength="30" placeholder="ラベル（任意）" aria-label="ラベル">
+      <button type="submit" class="btn-primary">追加</button>
+    </form>
+
+    <section>
+      <ul id="alarm-list" class="alarm-list"></ul>
+      <p id="empty" class="empty">アラームはまだありません</p>
+    </section>
+  </main>
+
+  <div id="ringing" class="ringing" hidden>
+    <div class="ringing-card">
+      <div class="ringing-icon">⏰</div>
+      <div id="ringing-time" class="ringing-time"></div>
+      <div id="ringing-label" class="ringing-label"></div>
+      <div class="ringing-actions">
+        <button id="snooze-btn" class="btn-secondary">スヌーズ 5分</button>
+        <button id="stop-btn" class="btn-primary">停止</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

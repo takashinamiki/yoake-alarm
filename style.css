@@ -1,0 +1,161 @@
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --muted: #8a8a8e;
+  --border: #e5e4e0;
+  --accent: #ff7a45;
+  --accent-text: #ffffff;
+  --off: #d1d1d6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111113;
+    --surface: #1c1c1f;
+    --text: #f2f2f4;
+    --muted: #8e8e93;
+    --border: #2c2c30;
+    --off: #3a3a3e;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+.app {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.clock { text-align: center; margin-bottom: 40px; }
+.clock-time {
+  font-size: 72px;
+  font-weight: 200;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.clock-date { color: var(--muted); margin-top: 4px; }
+
+.alarm-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.alarm-form input {
+  min-width: 0;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+}
+#alarm-time { flex: 0 0 auto; }
+#alarm-label { flex: 1; }
+
+button {
+  font: inherit;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: var(--accent-text); font-weight: 600; }
+.btn-secondary { background: var(--border); color: var(--text); }
+button:hover { opacity: .88; }
+
+.alarm-list { list-style: none; padding: 0; margin: 0; }
+.alarm-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.alarm-info { flex: 1; min-width: 0; }
+.alarm-time {
+  font-size: 32px;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+.alarm-label {
+  color: var(--muted);
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.alarm-item.off .alarm-time { color: var(--muted); }
+
+.toggle {
+  position: relative;
+  width: 50px;
+  height: 30px;
+  padding: 0;
+  border-radius: 15px;
+  background: var(--off);
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform .2s;
+}
+.toggle[aria-checked="true"] { background: var(--accent); }
+.toggle[aria-checked="true"]::after { transform: translateX(20px); }
+
+.delete {
+  background: none;
+  color: var(--muted);
+  padding: 8px;
+  font-size: 18px;
+}
+
+.empty { text-align: center; color: var(--muted); }
+
+.ringing {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .55);
+  padding: 16px;
+}
+.ringing[hidden] { display: none; }
+.ringing-card {
+  width: 100%;
+  max-width: 340px;
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--surface);
+  border-radius: 24px;
+}
+.ringing-icon { font-size: 48px; animation: shake .5s infinite; }
+.ringing-time { font-size: 56px; font-weight: 200; margin: 8px 0; }
+.ringing-label { color: var(--muted); min-height: 1.2em; margin-bottom: 24px; }
+.ringing-actions { display: flex; gap: 8px; }
+.ringing-actions button { flex: 1; white-space: nowrap; }
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-12deg); }
+  75% { transform: rotate(12deg); }
+}
